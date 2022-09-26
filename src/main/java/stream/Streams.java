@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -41,6 +42,17 @@ public class Streams {
         /***************************************************************************************/
         List<Integer> arrayList = Arrays.asList(1, 2, 4, 8, 9, 4, 6, 1, 10, 15, 9, 45, 9, 87, 9, 6, 13, 12, 10, 8);
         List<Integer> arrayList2 = Arrays.asList(1, 2, 4, 8, 9, 4, 6, 1);
+        List<User> users2 = List.of(new User(20, "user 1"), new User(21, "user 2"));
+        String str = users2.stream()
+                .map(user -> user.getAge() + " " + user.getName())
+                .collect(Collectors.joining(" ,", "{ ", " }"));
+
+        users2 = users2.stream()
+                .map(user -> new User(user.getAge() + user.getName()))
+                .collect(Collectors.toList());
+        System.out.println(users2);
+
+//        System.out.println(str);
 
         Function<Integer, String> function = Streams::numberToWord;
 
@@ -55,19 +67,19 @@ public class Streams {
                 /** yuqoridagi @param Function ishlaydi shu yerdagi mapda */
                 .map(Streams::numberToWord).toList();
 
-//        streamResult.forEach(System.out::println);
+        //        streamResult.forEach(System.out::println);
 
         // Возвращает true, если условие выполняется для всех элементов
         boolean result1 = arrayList.stream().allMatch(i -> i % 2 == 0);
-//        System.out.println(result1);
+        //        System.out.println(result1);
 
         // Возвращает true, если условие выполняется хотя бы для одного элемента
         boolean result2 = arrayList.stream().anyMatch(i -> i % 2 == 0);
-//        System.out.println(result2);
+        //        System.out.println(result2);
 
         // Возвращает true, если условие не выполняется ни для одного элемента
         boolean result3 = arrayList.stream().noneMatch(i -> i % 2 == 0);
-//        System.out.println(result3);
+        //        System.out.println(result3);
 
 
         Integer reduceResult = arrayList2.stream()
@@ -99,7 +111,7 @@ public class Streams {
         IntSummaryStatistics stats = intStream.peek(System.out::println)
                 .summaryStatistics();
 
-//        System.out.println(stats);
+        //        System.out.println(stats);
 
         // создание потока
         Stream<List<User>> stream = Stream.of(users);
@@ -118,7 +130,7 @@ public class Streams {
                 .map(String::toUpperCase)
                 .toList();
 
-//        System.out.println(concatAndUpper);
+        //        System.out.println(concatAndUpper);
 
 
         List<String> text3 = List.of("c", "d", "a", "b", "e");
@@ -134,7 +146,7 @@ public class Streams {
 
         /*************************************************************************************/
 
-        List<String> list = Arrays.asList("John","Tom","Bob");
+        List<String> list = Arrays.asList("John", "Tom", "Bob");
 
         String s = list.stream()
                 .collect(StringBuilder::new,
@@ -145,10 +157,9 @@ public class Streams {
         // alternative
         String s1 = list.stream()
                 .parallel()
-//                .unordered()
+                //                .unordered()
                 .collect(new MyCollector());
         System.out.println(s1);
-
 
 
     }
@@ -163,10 +174,29 @@ public class Streams {
     static class User {
         public int age;
         public String name;
+        public String info;
 
         public User(int age, String name) {
             this.age = age;
             this.name = name;
+        }
+
+        public User() {
+        }
+
+        public User(String info) {
+            this.info = info;
+        }
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "info='" + info + '\'' +
+                    '}';
+        }
+
+        public String info() {
+            return this.info + this.name + this.age;
         }
 
         public int getAge() {

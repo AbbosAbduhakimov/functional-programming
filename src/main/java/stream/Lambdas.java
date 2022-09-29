@@ -28,7 +28,7 @@ public class Lambdas {
         System.out.println(predicate.test(10));
 
 
-        // Function input two argument then mapping first argument to second argument and return second argument
+        // Function input one argument then mapping first argument to second argument and return second argument
         Function<Integer,String> function1 = String::valueOf;
         String apply = function1.apply(10);
         System.out.println(apply);

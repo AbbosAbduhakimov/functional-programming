@@ -15,7 +15,7 @@ public class MonadOptional {
 
 
         //  RIGHT IDENTITY
-        System.out.println(Optional.of(5).flatMap(Optional::of)
+        System.out.println(Optional.of(5).map(Optional::of)
                 .equals(Optional.of(5)));
 
 

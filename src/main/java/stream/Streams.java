@@ -12,28 +12,28 @@ public class Streams {
 
 
     static Map<Integer, String> singular = Map.of(
-            1, "bir",
-            2, "ikki",
-            3, "uch",
-            4, "to'rt",
-            5, "besh",
-            6, "olti",
-            7, "yetti",
-            8, "sakkiz",
-            9, "to'qiz"
+            1, "one",
+            2, "two",
+            3, "three",
+            4, "four",
+            5, "five",
+            6, "six",
+            7, "seven",
+            8, "eight",
+            9, "nine"
 
     );
 
     static Map<Integer, String> tenDigit = Map.of(
-            1, "o'n",
-            20, "yigirma",
-            30, "o'ttiz",
-            40, "qiriq",
-            50, "ellik",
-            60, "oltmish",
-            70, "yetmish",
-            80, "sakson",
-            90, "to'qson"
+            10, "ten",
+            20, "twenty",
+            30, "thirty",
+            40, "forty",
+            50, "fifty",
+            60, "sixty",
+            70, "seventy",
+            80, "eighty",
+            90, "ninety"
 
     );
 
@@ -60,11 +60,11 @@ public class Streams {
 
         List<String> streamResult = arrayList.stream()
                 // filter biron bir listdagi elementlarni bu ko'rinishda i-- filter true yoki false qaytaradi undan faqat true qaytgan qiymatlar o'tadi
-                /** yuqoridagi @param Predicate ishlaydi filter ichida*/
+                /** work on top  @param Predicate in filter*/
                 .filter(i -> i % 2 != 1)
                 // map(преобразование) bir turdan ikkinchi bir turga yoki ikkita bir hil tiplarni bir biriga o'zgartiradi
                 // ikki nuqtdan foydalansak Streams klassini numberToWord methodini ichidagi funksiyasi(bajariyotgan ishini) chaqirib olishimiz mumkin bo'ladi
-                /** yuqoridagi @param Function ishlaydi shu yerdagi mapda */
+                /** work on top  @param Function in filte*/
                 .map(Streams::numberToWord).toList();
 
         //        streamResult.forEach(System.out::println);
